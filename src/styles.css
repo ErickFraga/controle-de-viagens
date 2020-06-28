@@ -1,1 +1,127 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/**fulano mods**/
+
+:root {
+  --f-black: #000000;
+  --f-dark-grey: #333333;
+  --f-grey: #777777;
+  --f-light-grey: #aaaaaa;
+  --f-white: #ffffff;
+  --f-yellow: #FFC107;
+  --f-orange: #FF7E00;
+  --f-red: #FF0000;
+  --f-pink: #FF2385;
+  --f-purple: #7D00FF;
+  --f-blue: #0000FF;
+  --f-light-blue: #00FFFF;
+  --f-light-green: #00FF78;
+  --f-green: #00FF00;
+}
+
+/* Color*/
+.f-black {
+  color: var(--f-black);
+}
+
+.f-grey {
+  color: var(--f-grey);
+}
+
+.f-white {
+  color: var(--f-white);
+}
+
+.f-yellow {
+  color: var(--f-yellow);
+}
+
+.f-orange {
+  color: var(--f-orange);
+}
+
+.f-red {
+  color: var(--f-red);
+}
+
+.f-pink {
+  color: var(--f-pink);
+}
+
+.f-purple {
+  color: var(--f-purple);
+}
+
+.f-blue {
+  color: var(--f-blue);
+}
+
+.f-light-blue {
+  color: var(--f-light-blue);
+}
+
+.f-light-green {
+  color: var(--f-light-green);
+}
+
+.f-green {
+  color: var(--f-green);
+}
+
+/* bg color*/
+.f-bg-black {
+  background-color: var(--f-black);
+}
+
+.f-bg-grey {
+  background-color: var(--f-grey);
+}
+
+.f-bg-white {
+  background-color: var(--f-white);
+}
+
+.f-bg-yellow {
+  background-color: var(--f-yellow);
+}
+
+.f-bg-orange {
+  background-color: var(--f-orange);
+}
+
+.f-bg-red {
+  background-color: var(--f-red);
+}
+
+.f-bg-pink {
+  background-color: var(--f-pink);
+}
+
+.f-bg-purple {
+  background-color: var(--f-purple);
+}
+
+.f-bg-blue {
+  background-color: var(--f-blue);
+}
+
+.f-bg-light-blue {
+  background-color: var(--f-light-blue);
+}
+
+.f-bg-light-green {
+  background-color: var(--f-light-green);
+}
+
+.f-bg-green {
+  background-color: var(--f-green);
+}

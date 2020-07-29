@@ -1,11 +1,12 @@
 export class Despesas {
-    valor: number;
-    data: string;
-    tipo: string; // abastecimento - outros - caminhao
-    litros?: number;
-    km?: number;
-    nome?: string;
-    id_responsavel: string;
+  id?: string;
+  valor: number;
+  data: string;
+  tipo: string; // abastecimento - outros - caminhao
+  litros?: number;
+  km?: number;
+  nome?: string;
+  id_responsavel: string;
 
   constructor(params: Partial<Despesas>) {
     const tipoDespesa = localStorage.getItem('tipos-despesa').split(',')

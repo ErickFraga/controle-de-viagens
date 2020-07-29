@@ -1,0 +1,12 @@
+<div>
+  
+  <div *ngFor="let item of dataKeys" >
+    <b *ngIf="data[item] && item!='id'" color="accent">
+      {{item}}:
+    </b>
+    <span *ngIf="item!='id'">
+      {{data[item]}}
+    </span>
+  </div>
+</div>
+ 

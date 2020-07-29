@@ -1,0 +1,24 @@
+<div class="container">
+  <mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title">
+      Relatorio Mensal
+      <br/>
+
+    </mat-card-title>
+    <mat-card-subtitle class="subtitle">
+      
+    </mat-card-subtitle>
+    <b>Total de Despesas : </b><p>{{despesaTotal}}</p>
+    <b>Lucro bruto : </b><p>{{freteTotal}}</p>
+    <b>Lucru liquido : </b><p>{{freteTotal - despesaTotal}}</p>
+    <b>Restando do adiantamento : </b><p>{{adiantamentoTotal - despesaTotal}}</p>
+    <b>Caminhoes : </b><p>{{caminhoes | json}}</p>
+  </mat-card>
+  <mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title">
+      Analise mensal
+    </mat-card-title>
+    <!-- <p *ngFor="let mes of meses"> <b>mes {{meses.indexOf(mes)+1}} : </b>R$ {{mes}}</p> -->
+  </mat-card>
+</div>
+

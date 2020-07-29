@@ -1,7 +1,5 @@
-import { commonValidators } from 'src/validators/commonValidators';
-
 export class Motorista {
-  id: string;
+  id?: string;
   nome: string;
   foto: ImageBitmap;
   comissao: number;

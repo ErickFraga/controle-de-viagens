@@ -1,0 +1,48 @@
+<app-header></app-header>
+<mat-sidenav-container class="container">
+  <mat-sidenav
+    class="sidenav mat-primary"
+    mode="side"
+    opened
+    fixedInViewport="true"
+    fixedTopGap="64"
+    >
+    
+    <mat-nav-list>
+      <a mat-list-item routerLink="">
+        <i class="material-icons">
+          home
+        </i>
+        Inicio
+      </a>
+      <a mat-list-item routerLink="despesas">
+        <i class="material-icons">
+          monetization_on
+        </i>
+        Despesas
+      </a>
+      <a mat-list-item routerLink="motoristas">
+        <i class="material-icons">
+          person
+        </i>
+        Motoristas
+      </a>
+      <a mat-list-item routerLink="caminhoes">
+        <i class="material-icons">
+          local_shipping
+        </i>
+        Caminhoes
+      </a>
+      <a mat-list-item routerLink="viagens">
+        <i class="material-icons">
+          explore
+        </i>
+        Viagens
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="content" >
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<app-footer></app-footer>

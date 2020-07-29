@@ -1,0 +1,115 @@
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Nova Viagem</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Destino" formControlName="destino">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Frete" formControlName="frete">
+          </mat-form-field>
+        </div>
+        </div>
+      
+      <div class="row">        
+        <div class="col"> 
+          <mat-form-field class="full-width">
+             <mat-label>Motorista</mat-label>
+            <mat-select formControlName="motorista" value="">
+              <mat-option *ngFor="let motorista of motoristas" [value]="motorista.id">
+                {{motorista.nome}}
+              </mat-option>
+              <mat-option (click)="addMorotista()">
+                <b>Adicionar</b>
+              </mat-option>
+            </mat-select> 
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Adiantamento" formControlName="adiantamento">
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col"> 
+          <mat-form-field class="full-width">
+             <mat-label>Caminhao</mat-label>
+            <mat-select formControlName="placa_carreta" value="">
+              <mat-option *ngFor="let caminhao of caminhoes" [value]="caminhao.id">
+                {{caminhao.placa}}
+              </mat-option>
+              <mat-option (click)="addCaminhao()">
+                <b>Adicionar</b>
+              </mat-option>
+            </mat-select> 
+          </mat-form-field>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Escolha uma Data</mat-label>
+            <input matInput [matDatepicker]="picker"  formControlName="data_partida">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+              <span class="material-icons" matDatepickerToggleIcon>calendar_today</span>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Escolha uma Data</mat-label>
+            <input matInput [matDatepicker]="picker1" formControlName="data_chegada">
+            <mat-datepicker-toggle matSuffix [for]="picker1">
+              <span class="material-icons" matDatepickerToggleIcon>calendar_today</span>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+        
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Km de Partida" formControlName="km_partida">
+          </mat-form-field>
+        </div>
+      
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Km de Chegada" formControlName="km_chegada">
+          </mat-form-field>   
+        </div>
+      </div>
+      <div class="row">
+        <div class="col full-width">
+          <p *ngFor="let despesa of despesas">{{despesa}}</p>
+          <button mat-raised-button color="primary" type="button" (click)="addDespesa()">Adicionar Despesa</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Observações" formControlName="obs">
+          </mat-form-field>
+        </div>
+      </div>
+     
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

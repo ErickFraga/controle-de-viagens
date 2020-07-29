@@ -21,6 +21,10 @@ export class ViagensService extends FireStoreService<Viagem> {
     )
   }
 
+  getByCaminhao(id_caminhao){
+    return this.Query('placa_carreta', '==', id_caminhao)
+  }
+
   formatDate(fristDate:number, lastDate:number) : Number{
 
     let comparacao = lastDate - fristDate;

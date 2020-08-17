@@ -14,12 +14,11 @@ import { CommonModule } from '@angular/common';
   imports: [
     FormsModule,
     materializeModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     CommonModule
   ],
   exports: [
-    BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     materializeModule,
     CommonModule,

@@ -23,7 +23,9 @@
     "@angular/router": "~9.1.7",
     "@dev.arlamend7/angular-fire": "^1.1.1",
     "angularfire2": "^5.4.2",
+    "chart.js": "^2.9.3",
     "firebase": "^7.14.4",
+    "ng2-charts": "^2.3.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

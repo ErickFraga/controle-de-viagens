@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 import { CoreComponent } from './core.component';
@@ -21,6 +22,7 @@ import { FooterComponent } from './footer/footer.component';
     ],
 
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     SharedModule,
     CoreRoutingModule,

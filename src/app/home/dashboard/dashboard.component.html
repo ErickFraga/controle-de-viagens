@@ -4,21 +4,39 @@
       Filtros
     </mat-card-title>
     <form class="form">
-      <mat-form-field class="full-width">
-        <mat-label>Placa</mat-label>
-        <input type="text" matInput>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label>Cars</mat-label>
-        <select matNativeControl required>
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-      </mat-form-field>
+      <div class="full-width">
+        <mat-form-field class="full-width">
+          <mat-label>Caminhao</mat-label>
+          <mat-select formControlName="placa_carreta" (selectionChange)="getCaminhao($event.value)">
+            <mat-option value="geral">
+              <b>Geral</b>
+            </mat-option>
+            <mat-option *ngFor="let caminhao of caminhoes" [value]="caminhao.caminhao.id">
+              {{caminhao.caminhao.placa}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </form>
   </mat-card>
+
+  <mat-card class="home mat-elevation-z3 m20">
+    <mat-card-title class="title">
+      Analise mensal
+    </mat-card-title>
+    <!-- <p *ngFor="let mes of meses"> <b>mes {{meses.indexOf(mes)+1}} : </b>R$ {{mes}}</p> -->
+
+    <div class="flex">
+      <div class="flex-item">
+        <div style="display: block;">
+          <canvas *ngIf="pieChartData[0] && hasData()" baseChart [datasets]="pieChartData" [labels]="pieChartLabels"
+            [chartType]="pieChartType" [options]="lineChartOptions" [colors]="lineChartColors"
+            [legend]="lineChartLegend" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
   <mat-card class="home mat-elevation-z3">
     <mat-card-title class="title">
       Relatorio Mensal
@@ -36,21 +54,5 @@
     <p>R${{freteTotal - despesaTotal}}</p>
     <b>Restando do adiantamento : </b>
     <p>R${{adiantamentoTotal - despesaTotal}}</p>
-  </mat-card>
-  <mat-card class="home mat-elevation-z3 m20">
-    <mat-card-title class="title">
-      Analise mensal
-    </mat-card-title>
-    <!-- <p *ngFor="let mes of meses"> <b>mes {{meses.indexOf(mes)+1}} : </b>R$ {{mes}}</p> -->
-
-    <div class="flex">
-      <div class="flex-item">
-        <div style="display: block;">
-          <canvas *ngIf="pieChartData[0] && hasData()" baseChart [datasets]="pieChartData" [labels]="pieChartLabels"
-            [chartType]="pieChartType" [options]="lineChartOptions" [colors]="lineChartColors"
-            [legend]="lineChartLegend" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </div>
-    </div>
   </mat-card>
 </div>

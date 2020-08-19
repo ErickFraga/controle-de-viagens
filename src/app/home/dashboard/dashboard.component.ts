@@ -38,6 +38,8 @@ export class DashboardComponent implements OnInit {
   despesaTotal: number = 0
   adiantamentoTotal: number = 0
 
+  selectedCaminhao: string = 'geral';
+
   caminhoes: CaminhaoChart[] = []
 
   constructor(
@@ -53,19 +55,19 @@ export class DashboardComponent implements OnInit {
   };
   lineChartColors: Colors[] = [
 
-    { // dark grey
-      backgroundColor: 'rgba(57, 34, 230,0.2)',
+    {
+      backgroundColor: 'rgba(57, 34, 230,0.3)',
       borderColor: 'rgb(57, 34, 230)',
     },
-    { // red
+    {
       backgroundColor: 'rgba(44, 230, 34,0.3)',
       borderColor: 'rgb(44, 230, 34)',
     },
-    { // dark grey
-      backgroundColor: 'rgba(217, 34, 230,0.2)',
+    {
+      backgroundColor: 'rgba(217, 34, 230,0.3)',
       borderColor: 'rgb(217, 34, 230)',
     },
-    { // red
+    {
       backgroundColor: 'rgba(34, 194, 230,0.3)',
       borderColor: 'rgb(34, 194, 230)',
     }
@@ -89,13 +91,35 @@ export class DashboardComponent implements OnInit {
         caminhaoChart.caminhao = caminhao
         this.caminhoes.push(caminhaoChart)
       })
-      this.viagensHandle()
+
+      this.setGeralChart(this.caminhoes)
+
     }, () => { })
   }
 
-  viagensHandle() {
-    this.caminhoes.forEach((caminhao, index) => {
-      // ! criar os inputs
+
+  getCaminhao(id_caminhao: string) {
+    if (id_caminhao == 'geral') {
+      this.setGeralChart(this.caminhoes)
+    } else {
+      this.pieChartData = []
+      var caminhao = this.caminhoes.find(x => x.caminhao.id == id_caminhao)
+      this.adiantamentoTotal = caminhao.adiantamento
+      this.freteTotal = caminhao.frete
+      this.despesaTotal = 0
+      caminhao.valoresMes.forEach(despesa => {
+        this.despesaTotal += despesa
+      })
+      this.pieChartData[0] = {
+        label: caminhao.caminhao.placa,
+        data: caminhao.valoresMes,
+      }
+      this.Chart.update()
+    }
+  }
+
+  setGeralChart(caminhoes: CaminhaoChart[]) {
+    caminhoes.forEach((caminhao, index) => {
       this.viagensService.getByCaminhao(caminhao.caminhao.id).subscribe((viagens: Viagem[]) => {
         viagens.forEach((viagem: Viagem) => {
           caminhao.frete += Number(viagem.frete)
@@ -121,6 +145,8 @@ export class DashboardComponent implements OnInit {
   async mesesHandle(caminhao) {
     await caminhao.despesas.forEach(async (id_despesa: string) => {
       await this.despesasService.Get(id_despesa).subscribe((despesa: Despesas) => {
+        console.log(despesa);
+        console.log(3);
         const value = Number(despesa.data.split('/')[1]) - 1
         caminhao.meses[value].push(despesa)
         caminhao.valoresMes[value] += despesa.valor

@@ -223,29 +223,33 @@ export class HomeComponent implements OnInit {
           console.log(viagem.km_chegada);
           console.log(viagem.km_partida);
 
-          this.relatorioCaminhao[mes].quilometros += Number(viagem.km_chegada) - Number(viagem.km_partida);
+          this.relatorioCaminhao[mes].quilometros += viagem.km_chegada - viagem.km_partida;
+          this.relatorioCaminhao[mes].quantidade_viagens++;
         }
         viagem.despesas.forEach(x => this.despesasService.Get(x)
           .subscribe(despesa => {
             despesa.id = x;
 
-            this.relatorioCaminhao[mes].gasto += Number(despesa.valor);
-            this.relatorioCaminhao[mes].quantidade_viagens++;
+            this.relatorioCaminhao[mes].gasto += despesa.valor;
+            console.log(this.relatorioCaminhao[mes].gasto);
 
 
             if (despesa.tipo == 'combustivel') {
               /*
               console.log(mes);
-              console.log(`despesa km: ${despesa.km}`);
               console.log(`ultimo km km: ${ultimoKm}`);
               console.log(despesa.id);
               */
-              this.relatorioCaminhao[mes].litros += Number(despesa.litros);
+              this.relatorioCaminhao[mes].litros += despesa.litros;
               if ((this.relatorioCaminhao[mes].litros > 0) && (this.relatorioCaminhao[mes].quilometros > 0)) {
                 let media = this.relatorioCaminhao[mes].quilometros / this.relatorioCaminhao[mes].litros
                 this.relatorioCaminhao[mes].media = this.twoDecimals(media)
 
               }
+              console.log(`despesa km: ${despesa.km}`);
+              console.log(`despesa litros: ${despesa.litros}`);
+              console.log(`total km: ${this.relatorioCaminhao[mes].quilometros}`);
+              console.log(`total litros: ${this.relatorioCaminhao[mes].litros}`);
             }
           })
         )
@@ -322,6 +326,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  twoDecimals(x: number) { return Math.round(x * 100) / 100 }
+  twoDecimals(x: number) { return Number(Number.parseFloat(x.toString()).toFixed(2)) }
 
 }

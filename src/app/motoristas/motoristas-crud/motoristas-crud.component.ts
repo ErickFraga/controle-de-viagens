@@ -14,14 +14,18 @@ export class MotoristasCrudComponent implements OnInit {
     'Foto',
     'Comissao',
   ]
-
+  dataSourceIndex;
   insert:ComponentType<any> = MotoristasInsertComponent;
 
   constructor(
     public motoristasService: MotoristasService,
     private dialog: MatDialog) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.motoristasService.GetAll().subscribe(x => {
+      this.dataSourceIndex = x
+    })
+  }
   openDialog(): void{
     const dialogRef = this.dialog.open(MotoristasInsertComponent, {
       data: {}

@@ -18,15 +18,11 @@ const routes: Routes = [
   },
   {
     path: "viagens",
-    loadChildren: () => import('../app/viagens/viagens.module').then(x => x.ViagensModule),
+    loadChildren:() => import('../app/viagens/viagens.module').then(x => x.ViagensModule),
   },
   {
     path: "home",
     loadChildren: () => import('../app/home/home.module').then(x => x.HomeModule),
-  },
-  {
-    path: "search",
-    loadChildren: () => import('../app/search/search.module').then(x => x.HomeModule),
   },
   {
     path: "**",
@@ -35,7 +31,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class CoreRoutingModule { }
+export class CoreRoutingModule {}

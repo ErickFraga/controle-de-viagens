@@ -4,3 +4,15 @@
 a, ng-container {
   cursor: pointer;
 }
+
+.nao-mostrar{
+  display: none;
+  visibility: hidden !important;
+}
+.full-screen-modal .mat-dialog-container {
+  max-width: none;
+  box-shadow: none;
+}
+.mat-card {
+  box-shadow: none !important;
+}

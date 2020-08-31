@@ -1,13 +1,16 @@
 <div class="container">
-  <mat-card class="home mat-elevation-z3">
+
+  <mat-card class="home mat-elevation-z3 m20">
     <mat-card-title class="title">
-      Filtros
+      Analise mensal
     </mat-card-title>
-    <form class="form">
+    <!-- <p *ngFor="let mes of meses"> <b>mes {{meses.indexOf(mes)+1}} : </b>R$ {{mes}}</p> -->
+
+    <div class="form">
       <div class="full-width">
         <mat-form-field class="full-width">
           <mat-label>Caminhao</mat-label>
-          <mat-select formControlName="placa_carreta" (selectionChange)="getCaminhao($event.value)">
+          <mat-select formControlName="placa_carreta" (selectionChange)="getCaminhao($event)">
             <mat-option value="geral">
               <b>Geral</b>
             </mat-option>
@@ -17,14 +20,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-    </form>
-  </mat-card>
-
-  <mat-card class="home mat-elevation-z3 m20">
-    <mat-card-title class="title">
-      Analise mensal
-    </mat-card-title>
-    <!-- <p *ngFor="let mes of meses"> <b>mes {{meses.indexOf(mes)+1}} : </b>R$ {{mes}}</p> -->
+    </div>
 
     <div class="flex">
       <div class="flex-item">
@@ -36,10 +32,16 @@
       </div>
     </div>
   </mat-card>
-
   <mat-card class="home mat-elevation-z3">
     <mat-card-title class="title">
-      Relatorio Mensal
+      Tabela de Meses
+    </mat-card-title>
+    <app-index *ngIf="relatorioCaminhao" [showAction]='false' [dataSourceIndex]="relatorioCaminhao" [columns]="columns">
+    </app-index>
+  </mat-card>
+  <mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title">
+      Relatorio Total
       <br />
 
     </mat-card-title>
@@ -47,12 +49,13 @@
 
     </mat-card-subtitle>
     <b>Total de Despesas : </b>
-    <p>R${{despesaTotal}}</p>
+    <p>R${{twoDecimals(despesaTotal)}}</p>
     <b>Lucro bruto : </b>
-    <p>R${{freteTotal}}</p>
+    <p>R${{twoDecimals(freteTotal)}}</p>
     <b>Lucro liquido : </b>
-    <p>R${{freteTotal - despesaTotal}}</p>
+    <p>R${{twoDecimals(freteTotal - despesaTotal)}}</p>
     <b>Restando do adiantamento : </b>
-    <p>R${{adiantamentoTotal - despesaTotal}}</p>
+    <p>R${{twoDecimals(adiantamentoTotal - despesaTotal)}}</p>
   </mat-card>
+
 </div>

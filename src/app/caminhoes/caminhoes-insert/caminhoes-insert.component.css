@@ -35,3 +35,7 @@ a, ng-container {
 .col:last-child {
   margin-right: 0;
 }
+
+.mat-card {
+  box-shadow: none !important;
+}

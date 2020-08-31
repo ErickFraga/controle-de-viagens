@@ -3,7 +3,6 @@ import { ShowComponent } from './components/show/show.component';
 import { IndexComponent } from './components/index/index.component';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -18,12 +17,12 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   exports: [
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
     materializeModule,
-    CommonModule,
     IndexComponent,
-    ShowComponent
+    ShowComponent,
+    CommonModule
   ],
 })
 

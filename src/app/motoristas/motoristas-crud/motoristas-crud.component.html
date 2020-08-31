@@ -1,2 +1,3 @@
-<button mat-raised-button color="primary" (click)="openDialog()">Add</button>
-<app-index [service]="motoristasService" [insertComponent]="insert" [columns]="columns"></app-index>
+<button mat-raised-button color="primary" (click)="openDialog()">Adicionar Motorista</button>
+<app-index *ngIf="dataSourceIndex" [service]="motoristasService" [insertComponent]="insert"
+  [dataSourceIndex]="dataSourceIndex" [columns]="columns"></app-index>

@@ -1,7 +1,8 @@
 
 export class Viagem {
   id?: string;
-  destino: string;
+  chegada: string;
+  partida: string;
   motorista: string;
   frete: number;
   adiantamento?: number;
@@ -14,8 +15,10 @@ export class Viagem {
   obs: string;
 
   constructor(params: Partial<Viagem>) {
-    params.adiantamento == undefined ? params.adiantamento = (params.frete * 0.5) :
-    this.destino = params.destino;
+    params.adiantamento == undefined ? params.adiantamento = (params.frete * 0.5) : params.adiantamento
+
+    this.partida = params.partida;
+    this.chegada = params.chegada;
     this.motorista = params.motorista;
     this.frete = params.frete;
     this.adiantamento = params.adiantamento || undefined;
@@ -27,8 +30,8 @@ export class Viagem {
     this.obs = params.obs || '';
 
     this.despesas = [];
-    if(params.despesas == undefined || params.despesas.length > 0){ 
-      this.despesas = params.despesas ;
+    if (params.despesas == undefined || params.despesas.length > 0) {
+      this.despesas = params.despesas;
     }
     console.log(this);
   }

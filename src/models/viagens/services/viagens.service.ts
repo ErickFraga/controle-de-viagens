@@ -12,7 +12,7 @@ export class ViagensService extends FireStoreService<Viagem> {
     this.SetColletion('Viagem');
   }
 
-  viagemDuration(id_viagem){
+  viagemDuration(id_viagem) {
     return this.Get(id_viagem).pipe(
       map(
         viagem => {
@@ -21,11 +21,11 @@ export class ViagensService extends FireStoreService<Viagem> {
     )
   }
 
-  getByCaminhao(id_caminhao){
+  getByCaminhao(id_caminhao) {
     return this.Query('placa_carreta', '==', id_caminhao)
   }
 
-  formatDate(fristDate:number, lastDate:number) : Number{
+  formatDate(fristDate: number, lastDate: number): Number {
 
     let comparacao = lastDate - fristDate;
     comparacao = comparacao / 1000;

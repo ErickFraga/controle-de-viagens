@@ -1,16 +1,15 @@
 <div class="mat-elevation-z8">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
 
-    <ng-container *ngFor="let column of columns" [matColumnDef]="column" >
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</th>
       <td mat-cell *matCellDef="let row" (click)='openRow(row)'>{{handleRow(row, column)}}</td>
     </ng-container>
-    
     <ng-container matColumnDef="Acoes">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
-      <td mat-cell *matCellDef="let row">
+      <th [ngClass]="{'nao-mostrar': !showAction}" mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
+      <td [ngClass]="{'nao-mostrar': !showAction}" mat-cell *matCellDef="let row">
         <button mat-icon-button matTooltip="Editar" color="accent">
-          <a (click)="editRow(row)"class="material-icons">edit</a>
+          <a (click)="editRow(row)" class="material-icons">edit</a>
         </button>
         <button mat-icon-button color="warn">
           <a (click)="deleteRow(row.id)" class="material-icons">delete</a>
@@ -18,15 +17,14 @@
       </td>
     </ng-container>
 
-      
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
-    </table>
-    
-  <mat-paginator #paginator
-      [length]="dataSource?.data.length"
-      [pageIndex]="0"
-      [pageSize]="25"
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div *ngIf='showPaginator'>
+    <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="25"
       [pageSizeOptions]="[25, 50, 100]">
-  </mat-paginator>
+    </mat-paginator>
+  </div>
 </div>

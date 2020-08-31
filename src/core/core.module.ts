@@ -1,5 +1,3 @@
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
 import { SharedModule } from './../shared/shared.module';
 import { CoreComponent } from './core.component';
 import { CoreRoutingModule } from './core-routing.module';
@@ -11,6 +9,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -22,12 +21,11 @@ import { FooterComponent } from './footer/footer.component';
     ],
 
   imports: [
-    BrowserAnimationsModule,
-    CommonModule,
     SharedModule,
     CoreRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [CoreComponent],

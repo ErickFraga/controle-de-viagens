@@ -1,20 +1,20 @@
-<form class="mat-elevation-z4" *ngIf="tipos.length"[formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
-  <mat-card class="shipping-card">
+<form *ngIf="tipos.length" [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card>
     <mat-card-header>
-      <mat-card-title>Nova Despesa</mat-card-title>
+      <mat-card-title>Despesa</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Valor"  formControlName="valor">
+            <input type="number" matInput placeholder="Valor" formControlName="valor">
           </mat-form-field>
         </div>
 
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Escolha uma Data</mat-label>
-            <input matInput [matDatepicker]="picker"  formControlName="data">
+            <input matInput [matDatepicker]="picker" formControlName="data">
             <mat-datepicker-toggle matSuffix [for]="picker">
               <span class="material-icons" matDatepickerToggleIcon>calendar_today</span>
             </mat-datepicker-toggle>
@@ -26,27 +26,24 @@
         <div class="col">
           <mat-form-field class="full-width">
             <mat-label>Tipo</mat-label>
-            <mat-select formControlName="tipo" value=""> 
+            <mat-select formControlName="tipo" value="">
               <mat-option *ngFor="let tipo of tipos" [value]="tipo">
                 {{tipo}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        
-        <div class="col" 
-          *ngIf="this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 1] || this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 3]"
-        >
+
+        <div class="col"
+          *ngIf="this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 1] || this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 3]">
           <mat-form-field class="full-width">
             <input matInput placeholder="Nome" formControlName="nome">
           </mat-form-field>
         </div>
-        
-        
+
+
       </div>
-      <div class="row"
-        *ngIf="this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 3]"
-      >
+      <div class="row" *ngIf="this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 3]">
         <div class="col">
           <mat-form-field class="full-width">
             <input type="number" matInput placeholder="Litros" formControlName="litros">
@@ -58,10 +55,10 @@
           </mat-form-field>
         </div>
       </div>
-     
+
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" type="submit">Salvar Despesa</button>
     </mat-card-actions>
   </mat-card>
 </form>

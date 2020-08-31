@@ -1,8 +1,8 @@
 import { Despesas } from 'src/models/despesas/classes/despesa';
 import { DespesasService } from 'src/models/despesas/services/despesas.service';
-import { TipoDespesaService} from 'src/models/despesas/services/tipo-despesa.service';
+import { TipoDespesaService } from 'src/models/despesas/services/tipo-despesa.service';
 import { Component, Inject, LOCALE_ID } from '@angular/core';
-import { FormGroup ,FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MAT_DATE_LOCALE, DateAdapter } from "@angular/material/core"
 import { DespesasCrudComponent } from "../despesas-crud/despesas-crud.component";
@@ -25,45 +25,47 @@ export class DespesasInsertComponent {
 
   id: string
 
-  tipos: string[]= [];
-  selectedTipo: string 
+  tipos: string[] = [];
+  selectedTipo: string
 
   constructor(
-      private fb: FormBuilder,
-      private despesasService: DespesasService,
-      private tipoDespesaService: TipoDespesaService,
-      public dialogRef: MatDialogRef<DespesasCrudComponent>,
-      @Inject(MAT_DIALOG_DATA) public dados: DialogDespesa,
-      private dateAdapter: DateAdapter<any>
-    ) {
-      this.dateAdapter.setLocale('pt-br')
-      let FormDate 
-      let parsedDate
-      this.id = dados.id || null
-      
-      this.tipoDespesaService.GetAll().subscribe(
-      (x:any) => {
+    private fb: FormBuilder,
+    private despesasService: DespesasService,
+    private tipoDespesaService: TipoDespesaService,
+    public dialogRef: MatDialogRef<DespesasCrudComponent>,
+    @Inject(MAT_DIALOG_DATA) public dados: DialogDespesa,
+    private dateAdapter: DateAdapter<any>
+  ) {
+    this.dateAdapter.setLocale('pt-br')
+    let FormDate
+    let parsedDate
+    this.id = dados.id || null
+
+    this.tipoDespesaService.GetAll().subscribe(
+      (x: any) => {
         this.tipos.push(...x[0].value)
       })
-      
-      dados.data? parsedDate = dados.data.split('/'): false
 
-      dados.data? FormDate = new Date(`${parsedDate[1]}/${parsedDate[0]}/${parsedDate[2]}`): FormDate = new Date() 
+    dados.data ? parsedDate = dados.data.split('/') : false
 
-      this.addressForm = this.fb.group({
-        valor: dados.valor || null,
-        data: FormDate,
-        tipo: [dados.tipo, Validators.required],
-        nome: dados.nome || null,
-        litros: dados.litros || null,
-        km: dados.km || null,
-      });
+    dados.data ? FormDate = new Date(`${parsedDate[1]}/${parsedDate[0]}/${parsedDate[2]}`) : FormDate = new Date()
 
-    } 
+    this.addressForm = this.fb.group({
+      valor: [dados.valor || 0],
+      data: [FormDate],
+      tipo: [dados.tipo, Validators.required],
+      nome: [dados.nome || null],
+      litros: [dados.litros || 0],
+      km: [dados.km || 0],
+    });
+
+  }
 
   onSubmit() {
-    if(this.addressForm.status != "INVALID"){
-        
+    console.log(this.addressForm.status);
+
+    if (this.addressForm.status != "INVALID") {
+
       const valor = this.addressForm.value.valor
       const data: string = this.addressForm.value.data.toLocaleDateString()
       const tipo = this.addressForm.value.tipo
@@ -78,34 +80,37 @@ export class DespesasInsertComponent {
         nome: null,
         litros: null,
         km: null
-      }); 
-      
-      if((tipo == this.tipos[this.tipos.length - 1] || tipo == this.tipos[this.tipos.length - 3]) && nome != null){
+      });
+
+      if ((tipo == this.tipos[this.tipos.length - 1] || tipo == this.tipos[this.tipos.length - 3]) && nome != null) {
         despesa.nome = nome;
-        if(tipo == this.tipos[this.tipos.length - 3] && litros != null && km != null){
+        if (tipo == this.tipos[this.tipos.length - 3] && litros != null && km != null) {
           despesa.litros = litros
           despesa.km = km
-        } 
+        }
       }
-      
-      
-      if(this.id){
+
+
+      if (this.id) {
         this.despesasService.Update(despesa, this.id).subscribe(X => {
+          console.log('editou');
           this.dialogRef.close(this.id);
         })
-      }else{
+      } else {
         this.despesasService.Insert(despesa).subscribe(X => {
+          console.log('inseriu');
+
           this.dialogRef.close(X.id);
-        })  
+        })
       }
     }
   }
 
-  isCombustivel(){
+  isCombustivel() {
     return this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 3]
   }
 
-  isOutros(){
-    return this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 1] 
+  isOutros() {
+    return this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 1]
   }
 }

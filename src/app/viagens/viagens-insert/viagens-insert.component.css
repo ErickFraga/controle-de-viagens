@@ -27,3 +27,40 @@
 .col:last-child {
   margin-right: 0;
 }
+
+.left{
+  align-content: flex-start;
+}
+
+.center{
+  align-content: center;
+}
+
+.right{
+  align-content: flex-end;
+}
+
+.despesa-content{
+  width: 100%;
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-between !important;
+}
+
+
+.despesas-container{
+  margin: 1rem 0;
+}
+
+.despesas-field{
+  vertical-align: middle;
+}
+
+mat-dialog-content {
+  height: 100vh;
+  overflow: visible;
+}
+
+.mat-card {
+  box-shadow: none !important;
+}

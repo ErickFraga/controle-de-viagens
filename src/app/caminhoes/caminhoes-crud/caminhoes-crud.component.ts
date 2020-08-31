@@ -16,22 +16,26 @@ export class CaminhoesCrudComponent implements OnInit {
     'Placa'
   ]
 
-  insert:ComponentType<any> = CaminhoesInsertComponent;
-  
-  constructor( 
+  insert: ComponentType<any> = CaminhoesInsertComponent;
+
+  dataSource: any[];
+
+  constructor(
     public caminhoesService: CaminhoesService,
-    private dialog: MatDialog 
-    ) { }
+    private dialog: MatDialog
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.caminhoesService.GetAll().subscribe(x => this.dataSource = x);
+  }
 
-  openDialog(): void{
+  openDialog(): void {
     const dialogRef = this.dialog.open(CaminhoesInsertComponent, {
       data: {}
     })
-    
-    dialogRef.afterClosed().subscribe(result => {})
+
+    dialogRef.afterClosed().subscribe(result => { })
   }
 
-  
+
 }

@@ -10,7 +10,7 @@
       <div class="full-width">
         <mat-form-field class="full-width">
           <mat-label>Caminhao</mat-label>
-          <mat-select formControlName="placa_carreta" (selectionChange)="getCaminhao($event)">
+          <mat-select (selectionChange)="getCaminhao($event)">
             <mat-option value="geral">
               <b>Geral</b>
             </mat-option>
@@ -49,13 +49,13 @@
 
     </mat-card-subtitle>
     <b>Total de Despesas : </b>
-    <p>R${{twoDecimals(despesaTotal)}}</p>
+    <p>R${{numbersHandle(despesaTotal)}}</p>
     <b>Lucro bruto : </b>
-    <p>R${{twoDecimals(freteTotal)}}</p>
+    <p>R${{freteTotal}}</p>
     <b>Lucro liquido : </b>
-    <p>R${{twoDecimals(freteTotal - despesaTotal)}}</p>
+    <p>R${{numbersHandle(freteTotal - despesaTotal)}}</p>
     <b>Restando do adiantamento : </b>
-    <p>R${{twoDecimals(adiantamentoTotal - despesaTotal)}}</p>
+    <p>R${{numbersHandle(adiantamentoTotal - despesaTotal)}}</p>
   </mat-card>
 
 </div>

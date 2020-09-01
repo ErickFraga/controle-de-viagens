@@ -41,6 +41,9 @@ export class IndexComponent implements AfterViewInit, OnChanges {
     if (changes.dataSourceIndex && this.table) {
       this.dataSource = new IndexDataSource(changes.dataSourceIndex.currentValue);
       this.dataSource.sort = this.sort;
+      console.log(this.sort);
+      console.log(this.dataSource.sort);
+      
       this.dataSource.paginator = this.paginator;
       this.table.dataSource = this.dataSource;
       console.log(changes.dataSourceIndex.currentValue);
@@ -70,10 +73,6 @@ export class IndexComponent implements AfterViewInit, OnChanges {
   editRow(row) {
     let config = new MatDialogConfig()
     config = {
-      position: {
-        top: '10px',
-        right: '10px'
-      },
       height: '98%',
       width: '100vw',
       panelClass: 'full-screen-modal',

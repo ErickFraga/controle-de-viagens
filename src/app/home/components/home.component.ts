@@ -7,12 +7,11 @@ import { DespesasService } from "src/models/despesas/services/despesas.service";
 import { Despesas } from "src/models/despesas/classes/despesa";
 import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Colors, BaseChartDirective } from 'ng2-charts';
-import { reduce } from 'rxjs/operators';
-import { IfStmt } from '@angular/compiler';
+
 
 class Mes {
   mes: string
-  gasto: number
+  gasto: number 
   frete: number
   litros: number
   quilometros: number
@@ -125,12 +124,12 @@ export class HomeComponent implements OnInit {
   lineChartLegend = true;
   // events on slice click
   public chartClicked(e: any): void {
-    console.log(e);
+    //console.log(e);
   }
 
   // event on pie chart slice hover
   public chartHovered(e: any): void {
-    console.log(e);
+    //console.log(e);
   }
 
 
@@ -149,14 +148,8 @@ export class HomeComponent implements OnInit {
       new Mes({}),
       new Mes({})
     ];
-    /*  this.caminhoesService.GetAll().subscribe(caminhoes => {
-        caminhoes.forEach(x => this.gerarRelatorioCaminhao(x.id));
-      })
-      console.log(this.relatorioCaminhao);
-    */
-    this.gerarRelatorioGeral();
-    console.log('asdasdasdasdasdasd');
 
+    this.gerarRelatorioGeral();
   }
 
   gerarRelatorioGeral() {
@@ -172,9 +165,9 @@ export class HomeComponent implements OnInit {
         this.caminhoes.push(caminhaoChart)
       })
       this.viagensHandle()
-      console.log(this.caminhoes);
+      //console.log(this.caminhoes);
 
-      this.caminhoes.forEach(x => console.log(x.valoresMes))
+      //this.caminhoes.forEach(x => console.log(x.valoresMes))
     }, () => { }, () => {
 
     })
@@ -184,13 +177,16 @@ export class HomeComponent implements OnInit {
     this.caminhoes.forEach((caminhao, index) => {
       this.viagensService.getByCaminhao(caminhao.caminhao.id).subscribe((viagens: Viagem[]) => {
         viagens.forEach((viagem: Viagem) => {
-          caminhao.frete += Number(viagem.frete)
-          caminhao.adiantamento += Number(viagem.adiantamento)
+          console.log(viagem);
+          
+          caminhao.frete += this.numbersHandle(viagem.frete,)
+          caminhao.adiantamento += this.numbersHandle(viagem.adiantamento)
           caminhao.despesas.push(...viagem.despesas)
         })
       }, () => { }, () => {
-        this.freteTotal += caminhao.frete
-        this.adiantamentoTotal += caminhao.adiantamento
+        this.freteTotal += this.numbersHandle(caminhao.frete)
+        
+        this.adiantamentoTotal += this.numbersHandle(caminhao.adiantamento)
         this.mesesHandle(caminhao).finally(() => {
           this.pieChartData[index] = {
             label: caminhao.caminhao.placa,
@@ -218,38 +214,40 @@ export class HomeComponent implements OnInit {
       viagens.forEach(viagem => {
         let mes = Number(viagem.data_partida.split('/')[1]) - 1;
         if (viagem.data_chegada) {
-          console.log(mes);
+          //console.log(mes);
 
-          console.log(viagem.km_chegada);
-          console.log(viagem.km_partida);
+          //console.log(viagem.km_chegada);
+          //console.log(viagem.km_partida);
 
-          this.relatorioCaminhao[mes].quilometros += viagem.km_chegada - viagem.km_partida;
+          this.relatorioCaminhao[mes].quilometros += this.numbersHandle(viagem.km_chegada - viagem.km_partida);
+          console.log(this.relatorioCaminhao[mes].quilometros);
+          
           this.relatorioCaminhao[mes].quantidade_viagens++;
         }
         viagem.despesas.forEach(x => this.despesasService.Get(x)
           .subscribe(despesa => {
             despesa.id = x;
 
-            this.relatorioCaminhao[mes].gasto += despesa.valor;
-            console.log(this.relatorioCaminhao[mes].gasto);
+            this.relatorioCaminhao[mes].gasto += this.numbersHandle(despesa.valor);
+            //console.log(this.relatorioCaminhao[mes].gasto);
 
 
             if (despesa.tipo == 'combustivel') {
               /*
-              console.log(mes);
-              console.log(`ultimo km km: ${ultimoKm}`);
-              console.log(despesa.id);
+              //console.log(mes);
+              //console.log(`ultimo km km: ${ultimoKm}`);
+              //console.log(despesa.id);
               */
-              this.relatorioCaminhao[mes].litros += despesa.litros;
+              this.relatorioCaminhao[mes].litros += this.numbersHandle(despesa.litros);
               if ((this.relatorioCaminhao[mes].litros > 0) && (this.relatorioCaminhao[mes].quilometros > 0)) {
                 let media = this.relatorioCaminhao[mes].quilometros / this.relatorioCaminhao[mes].litros
-                this.relatorioCaminhao[mes].media = this.twoDecimals(media)
+                this.relatorioCaminhao[mes].media = this.numbersHandle(media)
 
               }
-              console.log(`despesa km: ${despesa.km}`);
-              console.log(`despesa litros: ${despesa.litros}`);
-              console.log(`total km: ${this.relatorioCaminhao[mes].quilometros}`);
-              console.log(`total litros: ${this.relatorioCaminhao[mes].litros}`);
+              //console.log(`despesa km: ${despesa.km}`);
+              //console.log(`despesa litros: ${despesa.litros}`);
+              //console.log(`total km: ${this.relatorioCaminhao[mes].quilometros}`);
+              //console.log(`total litros: ${this.relatorioCaminhao[mes].litros}`);
             }
           })
         )
@@ -259,17 +257,7 @@ export class HomeComponent implements OnInit {
 
     }, () => { },
       () => { })
-    /*
-    this.relatorioCaminhao.forEach(relatorio => {
-
-      console.log(relatorio);
-
-      if ((relatorio.litros > 0) && (relatorio.quilometros > 0)) {
-        relatorio.media = relatorio.quilometros / relatorio.litros
-      }
-      console.log(relatorio.media);
-    })
-    */
+ 
 
   }
 
@@ -297,8 +285,9 @@ export class HomeComponent implements OnInit {
     } else {
       var caminhao = this.caminhoes.find(x => x.caminhao.id == event.value)
       this.gerarRelatorioCaminhao(event.value)
-      this.adiantamentoTotal = caminhao.adiantamento
-      this.freteTotal = caminhao.frete
+      //console.log(caminhao);
+      this.adiantamentoTotal = this.numbersHandle(caminhao.adiantamento)
+      this.freteTotal = this.numbersHandle(caminhao.frete)
       this.despesaTotal = 0
       caminhao.valoresMes.forEach(despesa => {
         this.despesaTotal += despesa
@@ -318,14 +307,21 @@ export class HomeComponent implements OnInit {
       await this.despesasService.Get(id_despesa).subscribe((despesa: Despesas) => {
         const value = Number(despesa.data.split('/')[1]) - 1
         caminhao.meses[value].push(despesa)
-        caminhao.valoresMes[value] += Number(despesa.valor)
-        this.despesaTotal += Number(despesa.valor);
+        caminhao.valoresMes[value] += this.numbersHandle(despesa.valor)
+        this.despesaTotal += this.numbersHandle(despesa.valor);
         this.chart.update();
-        //console.log(this.pieChartData);
+        ////console.log(this.pieChartData);
       })
     })
   }
 
-  twoDecimals(x: number) { return Number(Number.parseFloat(x.toString()).toFixed(2)) }
-
+  numbersHandle(x:number | string, decimals: number =2) { 
+    //console.log(x); 
+    //console.log(this.despesaTotal);
+    //console.log(this.freteTotal);
+    //console.log(this.adiantamentoTotal);
+    
+    x = Number(x.toString().replace(',','.')).toFixed(decimals)
+    return Number(x)
+  }
 }

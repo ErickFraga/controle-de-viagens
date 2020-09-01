@@ -56,4 +56,8 @@ export class CaminhoesInsertComponent {
       }
     }
   }
+  
+  cancel(){
+    this.dialogRef.close()
+  }
 }

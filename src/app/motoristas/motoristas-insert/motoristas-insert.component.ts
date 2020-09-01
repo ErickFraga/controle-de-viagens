@@ -58,4 +58,8 @@ export class MotoristasInsertComponent {
       }
     }
   }
+
+  cancel(){
+    this.dialogRef.close()
+  }
 }

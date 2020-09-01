@@ -106,6 +106,10 @@ export class DespesasInsertComponent {
     }
   }
 
+  cancel(){
+    this.dialogRef.close(null)
+  }
+
   isCombustivel() {
     return this.addressForm.controls.tipo.value == this.tipos[this.tipos.length - 3]
   }
